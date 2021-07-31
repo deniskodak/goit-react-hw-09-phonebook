@@ -1,0 +1,14 @@
+@import '/src/styles/color';
+
+.header {
+    padding: 20px;
+    background-image: $bg-gradient;
+}
+
+.container {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1280px;
+    justify-content: space-between;
+}

@@ -1,0 +1,50 @@
+%input {
+    width: 250px;
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 22px;
+    border: 6px solid $input-border;
+    background: $white;
+    border-radius: 8%;
+    outline: none;
+};
+
+%label {
+        display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: $white;
+    font-weight: 600;
+    margin-bottom: 15px;
+
+    &:focus-within {
+        color: $label-focus;
+    }
+}
+
+%button {
+margin-left: auto;
+margin-right: auto;
+padding: 6px 10px;
+font-size: 22px;
+color: $black;
+border: 2px solid $primary-text;
+border-radius: 8%;
+background: $primary-text;
+box-shadow: 4px 5px 7px $white;
+outline: none;
+transition: transform 300ms linear;
+
+    &:focus,
+    &:hover {
+    transform: scale(1.15);
+    color: $black;
+    background-color: rgba(255, 255, 255, 0.959);
+    box-shadow: none;
+    border-color: $white;
+}
+    &:active {
+    color: $btn-active;
+    background: transparent;
+}
+}

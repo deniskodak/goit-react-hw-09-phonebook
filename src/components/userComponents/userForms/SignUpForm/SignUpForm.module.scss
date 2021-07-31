@@ -1,0 +1,23 @@
+@import '/src/styles/shared.scss';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    @extend %input;
+}
+
+.label {
+    @extend %label;
+
+    &:not(:last-child) {
+        margin-bottom: 30px;
+    }
+}
+
+.button {
+    @extend %button;
+}

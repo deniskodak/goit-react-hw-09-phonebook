@@ -1,0 +1,24 @@
+@import '/src/styles/color';
+
+.nav_list {
+    display: flex;
+    align-items: center;
+}
+
+.nav_item {
+    &:not(:last-child) {
+        margin-right: 20px;
+    }
+}
+
+.link {
+    display: inline-block;
+    color: $white;
+    padding: 10px 0px;
+    text-decoration: none;
+}
+
+.link_active {
+    color: $primary-text;
+
+}

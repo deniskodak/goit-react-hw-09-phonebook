@@ -1,42 +1,69 @@
-@import './styles/sharded.scss';
+@import './styles/shared.scss';
 
-
-.App {
-  text-align: center;
+body {
+  background: url(https://image.freepik.com/free-vector/white-abstract-background-design_23-2148825582.jpg);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-title-appear {
+  transform: translateX(-100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-title-appear-active {
+  transform: translateX(0);
+  transition: transform 250ms linear;
 }
 
-.App-header {
-  background-color: $black;
-  min-height: 100vh;
+.container {
+  padding: 40px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: $white;
 }
 
-.App-link {
-  color: #61dafb;
+.app-section {
+  position: relative;
+  width: calc(100% / 3.5);
+  min-width: 300px;
+  padding: 20px 20px;
+  background-image: $bg-gradient;
+
+  -webkit-box-shadow: 1px 3px 17px 1px rgba(0, 0, 0, 0.67);
+  box-shadow: 1px 3px 17px 1px rgba(0, 0, 0, 0.67);
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+.app-section:not(:last-child) {
+  margin-right: 40px;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.app-title {
+  margin-bottom: 15px;
+  color: $primary-text;
+}
+
+.app-title.top-margin {
+  margin-top: 15px
+}
+
+/* ANIMATION STYLES */
+.container-fade-appear {
+  transform: scale(0.1);
+  opacity: 0;
+  transform-origin: top left;
+}
+
+.container-fade-appear-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 250ms linear;
+}
+
+.container-next-fade-appear {
+  transform: scale(0.1);
+  opacity: 0;
+  transform-origin: top left;
+}
+
+.container-next-fade-appear-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 250ms linear 250ms;
 }
