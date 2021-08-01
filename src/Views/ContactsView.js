@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import PropTypes from "prop-types";
+
 import { phoneBookOps } from "../redux/contacts";
 import { phoneBookSelectors } from "../redux/contacts";
 
@@ -10,8 +10,11 @@ import Form from "../components/contactsComponents/Form";
 import Filter from "../components/contactsComponents/Filter";
 import ContactsList from "../components/contactsComponents/Contacts";
 
-const ContactsView = ({ fetchContacts, contacts }) => {
-  useEffect(() => fetchContacts(), [fetchContacts]);
+export default function ContactsView() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(phoneBookSelectors.getContacts);
+
+  useEffect(() => dispatch(phoneBookOps.getContacts()), [dispatch]);
 
   return (
     <div className="container">
@@ -45,18 +48,4 @@ const ContactsView = ({ fetchContacts, contacts }) => {
       </CSSTransition>
     </div>
   );
-};
-
-ContactsView.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  fetchContacts: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  contacts: phoneBookSelectors.getContacts(state),
-});
-
-const mapDispatchToProps = {
-  fetchContacts: phoneBookOps.getContacts,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsView);
+}

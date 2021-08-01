@@ -1,6 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import "./App.scss";
 import { Route, Switch, Redirect } from "react-router";
@@ -16,8 +15,10 @@ const ContactsView = lazy(() => import("./Views/ContactsView"));
 const SignUpView = lazy(() => import("./Views/SignUpView"));
 const LoginView = lazy(() => import("./Views/LoginView"));
 
-const App = ({ onGetCurrentUser }) => {
-  useEffect(() => onGetCurrentUser(), [onGetCurrentUser]);
+export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(authOps.getCurrentUser()), [dispatch]);
+
   return (
     <>
       <AppBar />
@@ -46,12 +47,4 @@ const App = ({ onGetCurrentUser }) => {
       </Suspense>
     </>
   );
-};
-
-App.propTypes = {
-  onGetCurrentUser: PropTypes.func.isRequired,
-};
-const mapDispatchToProps = {
-  onGetCurrentUser: authOps.getCurrentUser,
-};
-export default connect(null, mapDispatchToProps)(App);
+}

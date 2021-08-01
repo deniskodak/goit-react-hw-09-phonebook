@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import PropTypes from "prop-types";
+import { authOps } from "../../../../redux/auth";
 
 import styles from "./LoginForm.module.scss";
 
-const LoginForm = ({ onLogin }) => {
+export default function LoginForm() {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const onLogin = useCallback(
+    (user) => dispatch(authOps.login(user)),
+    [dispatch]
+  );
 
   const reset = () => {
     setEmail("");
@@ -72,10 +80,4 @@ const LoginForm = ({ onLogin }) => {
       </button>
     </form>
   );
-};
-
-LoginForm.propTypes = {
-  onLogin: PropTypes.func.isRequired,
-};
-
-export default LoginForm;
+}

@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
-
+import { useDispatch } from "react-redux";
+import { authOps } from "../../../../redux/auth";
 import styles from "./SignUpForm.module.scss";
 
-const SignUpForm = ({ onSignUp }) => {
+export default function SignUpForm() {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const onSignUp = useCallback(
+    (user) => dispatch(authOps.signUp(user)),
+    [dispatch]
+  );
 
   const reset = () => {
     setName("");
@@ -91,10 +98,4 @@ const SignUpForm = ({ onSignUp }) => {
       </button>
     </form>
   );
-};
-
-SignUpForm.propTypes = {
-  onSignUp: PropTypes.func.isRequired,
-};
-
-export default SignUpForm;
+}
