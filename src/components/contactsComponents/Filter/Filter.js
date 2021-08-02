@@ -1,15 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useCallback } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import styles from "./Filter.module.css";
 
-import { useState } from "react";
+import { phoneBookActions } from "../../../redux/contacts";
 
-const Filter = ({ filterContacts }) => {
+export default function Filter() {
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState("");
 
+  const onFilterContacts = useCallback(
+    (filterValue) => dispatch(phoneBookActions.filterContacts(filterValue)),
+    [dispatch]
+  );
+
   const handleChange = (e) => {
-    filterContacts(e.target.value);
+    onFilterContacts(e.target.value);
 
     setFilter(e.target.value);
   };
@@ -28,9 +36,4 @@ const Filter = ({ filterContacts }) => {
       />
     </label>
   );
-};
-
-Filter.propTypes = {
-  filterContacts: PropTypes.func.isRequired,
-};
-export default Filter;
+}

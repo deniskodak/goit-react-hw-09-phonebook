@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useCallback, useState } from "react";
 
 import styles from "./Form.module.css";
 
 import { createRandomContact } from "./randomContact";
+import { useDispatch, useSelector } from "react-redux";
+import { phoneBookOps, phoneBookSelectors } from "../../../redux/contacts";
 
-const ContactForm = ({ contacts, addContact }) => {
+export default function ContactForm() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(phoneBookSelectors.getContacts);
   const [contactName, setContactName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+
+  const addContact = useCallback(
+    (name, phone) => dispatch(phoneBookOps.addContact(name, phone)),
+    [dispatch]
+  );
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -94,11 +102,4 @@ const ContactForm = ({ contacts, addContact }) => {
       </div>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  addContact: PropTypes.func.isRequired,
-};
-
-export default ContactForm;
+}

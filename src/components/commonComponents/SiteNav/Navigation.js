@@ -1,37 +1,35 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { authSelectors } from "../../../redux/auth";
 
-import styles from './Navigation.module.scss';
+import styles from "./Navigation.module.scss";
+import { useSelector } from "react-redux";
 
-const Navigation = ({ isAuthenticated }) => (
-  <ul className={styles.nav_list}>
-    <li className={styles.nav_item}>
-      <NavLink
-        exact
-        to="/"
-        className={styles.link}
-        activeClassName={styles.link_active}
-      >
-        Home
-      </NavLink>
-    </li>
-    {isAuthenticated && (
-      <li>
+export default function Navigation() {
+  const isLoggedIn = useSelector(authSelectors.isAuthenticated);
+  return (
+    <ul className={styles.nav_list}>
+      <li className={styles.nav_item}>
         <NavLink
-          to="/contacts"
+          exact
+          to="/"
           className={styles.link}
           activeClassName={styles.link_active}
         >
-          Contacts
+          Home
         </NavLink>
       </li>
-    )}
-  </ul>
-);
-
-Navigation.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-};
-
-export default Navigation;
+      {isLoggedIn && (
+        <li>
+          <NavLink
+            to="/contacts"
+            className={styles.link}
+            activeClassName={styles.link_active}
+          >
+            Contacts
+          </NavLink>
+        </li>
+      )}
+    </ul>
+  );
+}

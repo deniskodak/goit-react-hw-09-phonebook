@@ -1,23 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import { authSelectors } from "../../../redux/auth";
 
-import Navigation from '../SiteNav';
-import AuthNav from '../AuthNav';
-import UserMenu from '../../userComponents/UserMenu';
+import Navigation from "../SiteNav";
+import AuthNav from "../AuthNav";
+import UserMenu from "../../userComponents/UserMenu";
 
-import styles from './AppBar.module.scss';
+import styles from "./AppBar.module.scss";
+import { useSelector } from "react-redux";
 
-const AppBar = ({ isAuthenticated }) => (
-  <header className={styles.header}>
-    <div className={styles.container}>
-      <Navigation />
-      {!isAuthenticated ? <AuthNav /> : <UserMenu />}
-    </div>
-  </header>
-);
-
-AppBar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-};
-
-export default AppBar;
+export default function AppBar() {
+  const isLoggedIn = useSelector(authSelectors.isAuthenticated);
+  return (
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <Navigation />
+        {!isLoggedIn ? <AuthNav /> : <UserMenu />}
+      </div>
+    </header>
+  );
+}
