@@ -1,1 +1,2 @@
-Похоже что это последняя домашка по реакту:( Было так cool, всегда ждал новой домашки и нового код ревью.. Прийми мои благодарности за твою проделанную работу, мне понравилось с тобой работать!
+This application is like TODO list, but with auth funcionality.
+https://last-phonebook-app.netlify.app/
